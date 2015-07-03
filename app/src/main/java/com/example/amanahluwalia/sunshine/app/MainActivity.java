@@ -15,9 +15,41 @@ public class MainActivity extends ActionBarActivity {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
+
+    @Override
+    protected void onStart() {
+        Log.v(LOG_TAG, "inside onStart");
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.v(LOG_TAG, "inside onResume");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.v(LOG_TAG, "inside onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.v(LOG_TAG, "inside onStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.v(LOG_TAG, "inside onDestroy");
+        super.onDestroy();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.v(LOG_TAG," inside onCreate");
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -25,6 +57,8 @@ public class MainActivity extends ActionBarActivity {
                     .commit();
         }
     }
+
+
 
 
     @Override
