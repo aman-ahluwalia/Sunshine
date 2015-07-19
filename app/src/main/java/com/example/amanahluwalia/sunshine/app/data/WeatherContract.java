@@ -26,9 +26,9 @@ import android.text.format.Time;
  */
 public class WeatherContract {
 
-    public static String CONTENT_AUTHORITY = "com.example.amanahluwalia.sunshine.app";
+    public static final String CONTENT_AUTHORITY = "com.example.amanahluwalia.sunshine.app";
 
-    public static Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     public static final String PATH_WEATHER = "weather";
     public static final String PATH_LOCATION = "location";
@@ -134,7 +134,7 @@ public class WeatherContract {
 
         public static Uri buildWeatherLocationWithDate(String locationSetting, long date) {
             return CONTENT_URI.buildUpon().appendPath(locationSetting)
-                    .appendPath(Long.toString(date)).build();
+                    .appendPath(Long.toString(normalizeDate(date))).build();
         }
 
         public static String getLocationSettingFromUri(Uri uri) {

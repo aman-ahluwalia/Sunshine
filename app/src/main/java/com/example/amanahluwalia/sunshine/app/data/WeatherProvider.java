@@ -39,7 +39,7 @@ public class WeatherProvider extends ContentProvider {
 
     static{
         sWeatherByLocationSettingQueryBuilder = new SQLiteQueryBuilder();
-        
+
         //This is an inner join which looks like
         //weather INNER JOIN location ON weather.location_id = location._id
         sWeatherByLocationSettingQueryBuilder.setTables(
@@ -229,27 +229,6 @@ public class WeatherProvider extends ContentProvider {
         Uri returnUri;
 
         switch (match) {
-            case WEATHER_WITH_LOCATION_AND_DATE: {
-               // normalizeDate(values);
-                String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
-                long Date = WeatherContract.WeatherEntry.getStartDateFromUri(uri);
-                long _id = db.insert(WeatherContract.WeatherEntry.TABLE_NAME, null, values);
-                if(_id > 0)
-                    returnUri = WeatherContract.WeatherEntry.buildWeatherLocationWithStartDate(locationSetting, Date);
-                else
-                    throw new android.database.SQLException("Failed to insert row into " + uri);
-                break;
-            }
-            case WEATHER_WITH_LOCATION: {
-                normalizeDate(values);
-                String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
-                long _id = db.insert(WeatherContract.WeatherEntry.TABLE_NAME, null, values);
-                if(_id > 0)
-                    returnUri = WeatherContract.WeatherEntry.buildWeatherLocation(locationSetting);
-                else
-                    throw new android.database.SQLException("Failed to insert row into " + uri);
-                break;
-            }
             case WEATHER: {
                 normalizeDate(values);
                 long _id = db.insert(WeatherContract.WeatherEntry.TABLE_NAME, null, values);
@@ -261,7 +240,7 @@ public class WeatherProvider extends ContentProvider {
             }
             case LOCATION: {
                 long _id = db.insert(WeatherContract.LocationEntry.TABLE_NAME, null, values);
-                if(_id > 0)
+                if ( _id > 0 )
                     returnUri = WeatherContract.LocationEntry.buildLocationUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
